@@ -1,0 +1,11 @@
+{
+  "name": "hello-github-actions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Jmen/hello-github-actions.git",
+  "author": "Jaimen Lathia <Jaimen.Lathia@moonpig.com>",
+  "license": "MIT",
+  "dependencies": {
+    "pino": "^6.13.0"
+  }
+}
