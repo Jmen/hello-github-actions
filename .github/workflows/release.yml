@@ -1,7 +1,7 @@
 name: Release
 
 on: 
-  workflow_dispatch:
+  workflow_dispatch: # Allows running workflow manually
 
 jobs:
   deploy-prod:
@@ -16,6 +16,7 @@ jobs:
         with:
           name: build
           path: output
+          commit: ${{ github.event.pull_request.head.sha }}
           workflow: master.yml
           workflow_conclusion: success
 
