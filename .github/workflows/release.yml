@@ -1,8 +1,7 @@
 name: Release
 
 on: 
-  release:
-    types: [published]
+  workflow_dispatch:
 
 jobs:
   deploy-prod:
@@ -10,14 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - id: latest
-        uses: thebritican/fetch-latest-release@v1.0.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/checkout@v2
-        with: 
-          ref: ${{ steps.latest.outputs.tag_name }}
+
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          name: build
+          path: output
+          workflow: master.yml
+          workflow_conclusion: success
 
       - name: Deploy
         run: ./scripts/deploy.sh
