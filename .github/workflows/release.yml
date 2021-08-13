@@ -1,11 +1,11 @@
-name: Deploy
+name: Release
 
 on: 
   release:
-    types: [published, deleted]
+    types: [published]
 
 jobs:
-  deploy_release:
+  deploy-prod:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,6 +13,10 @@ jobs:
         uses: thebritican/fetch-latest-release@v1.0.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v2
+        with: 
+          ref: ${{ steps.latest.outputs.tag_name }}
 
       - name: Deploy
         run: ./scripts/deploy.sh
